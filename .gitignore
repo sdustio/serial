@@ -25,6 +25,7 @@ msg_gen
 srv_gen
 doc/html
 *sublime-workspace
+.vscode/
 *.user
 *.suo
 *.sdf
