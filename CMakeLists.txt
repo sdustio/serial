@@ -5,6 +5,10 @@ project(serial
 )
 set(TARGET_NAME ${PROJECT_NAME}Targets)
 
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
+endif(NOT CMAKE_BUILD_TYPE)
+
 if(APPLE)
     find_library(IOKIT_LIBRARY IOKit)
     find_library(FOUNDATION_LIBRARY Foundation)
@@ -33,11 +37,11 @@ endif()
 add_library(${PROJECT_NAME} STATIC ${serial_SRCS})
 
 if(APPLE)
-    target_link_libraries(${PROJECT_NAME} ${FOUNDATION_LIBRARY} ${IOKIT_LIBRARY})
+    target_link_libraries(${PROJECT_NAME} PRIVATE ${FOUNDATION_LIBRARY} ${IOKIT_LIBRARY})
 elseif(UNIX)
-    target_link_libraries(${PROJECT_NAME} rt pthread)
+    target_link_libraries(${PROJECT_NAME} PRIVATE rt pthread)
 else()
-    target_link_libraries(${PROJECT_NAME} setupapi)
+    target_link_libraries(${PROJECT_NAME} PRIVATE setupapi)
 endif()
 
 target_include_directories(${PROJECT_NAME}
