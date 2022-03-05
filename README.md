@@ -38,6 +38,14 @@ Build the documentation:
 
     doxygen doc/Doxyfile
 
+Test
+
+    cmake -DSERIAL_BUILD_TESTS:BOOL=TRUE -DCMAKE_BUILD_TYPE:STRING=Debug -H$(pwd) -B$(pwd)/build
+    cmake --build $(pwd)/build --target all
+    cd $(pwd)/build
+    ctest
+    ctest -T memcheck
+
 ### Authors
 
 William Woodall <wjwwood@gmail.com>
