@@ -14,6 +14,7 @@ if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
 endif(NOT CMAKE_BUILD_TYPE)
 option(SERIAL_BUILD_TESTS "Build tests." OFF)
+option(SERIAL_BUILD_EXAMPLES "Build examples." OFF)
 
 if(APPLE)
     find_library(IOKIT_LIBRARY IOKit)
@@ -40,7 +41,7 @@ else()
 endif()
 
 ## Add serial library
-add_library(${PROJECT_NAME} STATIC ${serial_SRCS})
+add_library(${PROJECT_NAME} ${serial_SRCS})
 
 if(APPLE)
     target_link_libraries(${PROJECT_NAME} PRIVATE ${FOUNDATION_LIBRARY} ${IOKIT_LIBRARY})
@@ -112,9 +113,11 @@ install(
 )
 
 ## Uncomment for example
-add_executable(serial_example examples/serial_example.cc)
-add_dependencies(serial_example ${PROJECT_NAME})
-target_link_libraries(serial_example ${PROJECT_NAME})
+if(SERIAL_BUILD_EXAMPLES)
+  add_executable(serial_example examples/serial_example.cc)
+  add_dependencies(serial_example ${PROJECT_NAME})
+  target_link_libraries(serial_example ${PROJECT_NAME})
+endif(SERIAL_BUILD_EXAMPLES)
 
 ## Tests
 if(SERIAL_BUILD_TESTS)
