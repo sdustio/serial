@@ -5,6 +5,11 @@ project(serial
 )
 set(TARGET_NAME ${PROJECT_NAME}Targets)
 
+### C
+set(CMAKE_C_STANDARD 11)
+### CXX
+set(CMAKE_CXX_STANDARD 14)
+
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
 endif(NOT CMAKE_BUILD_TYPE)

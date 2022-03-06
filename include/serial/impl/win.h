@@ -74,7 +74,7 @@ public:
 
   size_t
   available ();
-  
+
   bool
   waitReadable (uint32_t timeout);
 
@@ -181,7 +181,7 @@ protected:
   void reconfigurePort ();
 
 private:
-  wstring port_;               // Path to the file descriptor
+  string port_;               // Path to the file descriptor
   HANDLE fd_;
 
   bool is_open_;

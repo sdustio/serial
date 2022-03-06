@@ -139,7 +139,7 @@ Serial::read (std::vector<uint8_t> &buffer, size_t size)
   }
   catch (const std::exception &e) {
     delete[] buffer_;
-    throw;
+    throw e;
   }
 
   buffer.insert (buffer.end (), buffer_, buffer_+bytes_read);
@@ -158,7 +158,7 @@ Serial::read (std::string &buffer, size_t size)
   }
   catch (const std::exception &e) {
     delete[] buffer_;
-    throw;
+    throw e;
   }
   buffer.append (reinterpret_cast<const char*>(buffer_), bytes_read);
   delete[] buffer_;

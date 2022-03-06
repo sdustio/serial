@@ -7,7 +7,6 @@
 #include "serial/impl/win.h"
 
 using std::string;
-using std::wstring;
 using std::stringstream;
 using std::invalid_argument;
 using serial::Serial;
@@ -20,10 +19,10 @@ using serial::SerialException;
 using serial::PortNotOpenedException;
 using serial::IOException;
 
-inline wstring
-_prefix_port_if_needed(const wstring &input)
+inline string
+_prefix_port_if_needed(const string &input)
 {
-  static wstring windows_com_port_prefix = L"\\\\.\\";
+  static string const windows_com_port_prefix = "\\\\.\\";
   if (input.compare(0, windows_com_port_prefix.size(), windows_com_port_prefix) != 0)
   {
     return windows_com_port_prefix + input;
@@ -35,12 +34,12 @@ Serial::SerialImpl::SerialImpl (const string &port, unsigned long baudrate,
                                 bytesize_t bytesize,
                                 parity_t parity, stopbits_t stopbits,
                                 flowcontrol_t flowcontrol)
-  : port_ (port.begin(), port.end()), fd_ (INVALID_HANDLE_VALUE), is_open_ (false),
+  : port_ (port), fd_ (INVALID_HANDLE_VALUE), is_open_ (false),
     baudrate_ (baudrate), parity_ (parity),
     bytesize_ (bytesize), stopbits_ (stopbits), flowcontrol_ (flowcontrol)
 {
-  if (port_.empty () == false)
-    open ();
+  if (!port_.empty())
+    open();
   read_mutex = CreateMutex(NULL, false, NULL);
   write_mutex = CreateMutex(NULL, false, NULL);
 }
@@ -58,14 +57,13 @@ Serial::SerialImpl::open ()
   if (port_.empty ()) {
     throw invalid_argument ("Empty port is invalid.");
   }
-  if (is_open_ == true) {
+  if (is_open_) {
     throw SerialException ("Serial port already open.");
   }
 
   // See: https://github.com/wjwwood/serial/issues/84
-  wstring port_with_prefix = _prefix_port_if_needed(port_);
-  LPCWSTR lp_port = port_with_prefix.c_str();
-  fd_ = CreateFileW(lp_port,
+  string port_with_prefix = _prefix_port_if_needed(port_);
+  fd_ = CreateFileA(port_with_prefix.c_str(),
                     GENERIC_READ | GENERIC_WRITE,
                     0,
                     0,
@@ -360,13 +358,13 @@ Serial::SerialImpl::write (const uint8_t *data, size_t length)
 void
 Serial::SerialImpl::setPort (const string &port)
 {
-  port_ = wstring(port.begin(), port.end());
+  port_ = port;
 }
 
 string
 Serial::SerialImpl::getPort () const
 {
-  return string(port_.begin(), port_.end());
+  return port_;
 }
 
 void
