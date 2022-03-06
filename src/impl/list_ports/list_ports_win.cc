@@ -8,12 +8,12 @@
  */
 
 #include "serial/serial.h"
-#include <cstring>
-#include <devguid.h>
-#include <initguid.h>
-#include <setupapi.h>
 #include <tchar.h>
 #include <windows.h>
+#include <setupapi.h>
+#include <initguid.h>
+#include <devguid.h>
+#include <cstring>
 
 using serial::PortInfo;
 using std::string;
