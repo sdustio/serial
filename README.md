@@ -31,8 +31,8 @@ Get the code:
 
 Build and Install:
 
-    cmake -DCMAKE_INSTALL_PREFIX:STRING=$HOME/.local -H$(pwd) -B$(pwd)/build
-    cmake --build $(pwd)/build --target install
+    cmake -DCMAKE_INSTALL_PREFIX:STRING=$HOME/.local -H$(pwd) -B$(pwd)/build-release
+    cmake --build $(pwd)/build-release --target install
 
 Build the documentation:
 
@@ -48,6 +48,7 @@ Test
 
 ### Authors
 
+Michael Ding <yandy.ding@qq.com>
 William Woodall <wjwwood@gmail.com>
 John Harrison <ash.gti@gmail.com>
 
