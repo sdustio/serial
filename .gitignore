@@ -1,4 +1,3 @@
-.*
 .DS_Store
 *.coverage
 *.egg-info
@@ -25,7 +24,6 @@ msg_gen
 srv_gen
 doc/html
 *sublime-workspace
-.vscode/
 *.user
 *.suo
 *.sdf

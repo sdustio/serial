@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 project(serial
   LANGUAGES CXX
-  VERSION 1.2.2
+  VERSION 2.0.0
 )
 set(TARGET_NAME ${PROJECT_NAME}Targets)
 
@@ -122,13 +122,14 @@ endif(SERIAL_BUILD_EXAMPLES)
 ## Tests
 if(SERIAL_BUILD_TESTS)
 if(UNIX)
+  find_package(GTest REQUIRED)
   include(GoogleTest)
   include(CTest)
   find_program(MEMORYCHECK_COMMAND NAMES valgrind)
   set(MEMORYCHECK_COMMAND_OPTIONS "--trace-children=yes --leak-check=full")
 
   add_executable(${PROJECT_NAME}-test tests/unix_serial_tests.cc)
-  target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME} gtest)
+  target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME} GTest::GTest)
   if(NOT APPLE)
     target_link_libraries(${PROJECT_NAME}-test util)
   endif()
@@ -136,7 +137,7 @@ if(UNIX)
 
   if(NOT APPLE)
     add_executable(${PROJECT_NAME}-test-timer tests/unit/unix_timer_tests.cc)
-    target_link_libraries(${PROJECT_NAME}-test-timer ${PROJECT_NAME} gtest)
+    target_link_libraries(${PROJECT_NAME}-test-timer ${PROJECT_NAME} GTest::GTest)
     gtest_discover_tests(${PROJECT_NAME}-test-timer)
   endif()
 endif(UNIX)
