@@ -16,6 +16,8 @@ API Documentation: http://wjwwood.github.io/serial/doc/1.1.0/index.html
 
 ## Install
 
+#### Install from source
+
 **Dependencies**
 
 Required:
@@ -40,6 +42,24 @@ Build the documentation:
 
     doxygen doc/Doxyfile
 
+
+#### Install from linux package
+
+Download linux package and install it using related package manager:
+
+**Ubuntu/Debian**
+
+```sh
+curl -LO https://github.com/sdustio/serial/releases/download/2.0.0/serial_2.0.0_amd64.deb
+sudo dpkg -i serial_2.0.0_amd64.deb
+```
+
+**Redhat/CentOS**
+
+```sh
+curl -LO https://github.com/sdustio/serial/releases/download/2.0.0/serial-2.0.0-1.x86_64.rpm
+sudo rpm -i serial-2.0.0-1.x86_64.rpm
+```
 
 ## Contribute
 

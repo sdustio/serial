@@ -142,3 +142,6 @@ if(UNIX)
   endif()
 endif(UNIX)
 endif(SERIAL_BUILD_TESTS)
+
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
+include(packing)
