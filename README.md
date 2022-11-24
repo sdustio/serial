@@ -1,7 +1,7 @@
 # Serial Communication Library
 
 [![test](https://github.com/sdustio/serial/actions/workflows/test.yml/badge.svg)](https://github.com/sdustio/serial/actions/workflows/test.yml)
-[![build](https://github.com/sdustio/serial/actions/workflows/build.yml/badge.svg)](https://github.com/sdustio/serial/actions/workflows/build.yml)
+[![release](https://github.com/sdustio/serial/actions/workflows/build.yml/badge.svg)](https://github.com/sdustio/serial/actions/workflows/release.yml)
 
 
 This is a cross-platform library for interfacing with rs-232 serial like ports written in C++. It provides a modern C++ interface with a workflow designed to look and feel like PySerial, but with the speed and control provided by C++.
